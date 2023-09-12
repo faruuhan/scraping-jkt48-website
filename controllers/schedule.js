@@ -85,9 +85,11 @@ const schedule = {
 
         const scheduleList = [];
 
-        const getTable = document.querySelectorAll(".table-pink__scroll tbody");
+        const getTable = document.querySelectorAll(".table-pink__scroll table");
 
-        const getRowTable = Array.from(getTable[1].querySelectorAll("tr"));
+        const getRowTable = Array.from(
+          getTable[1].querySelectorAll("tbody tr")
+        );
 
         getRowTable.map((schedule) => {
           const listMember = [];
