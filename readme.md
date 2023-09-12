@@ -19,14 +19,14 @@ scraping JKT48 website API
 
 #### Get all schedule
 
-```http
+```bash
   GET /api/schedule
 ```
 
 #### Get detail schedule
 
-```http
-  GET /api/schedule/:idschedule
+```bash
+  GET /api/schedule/detail/:idschedule
 ```
 
 | Parameter    | Type     | Description                       |
@@ -35,14 +35,14 @@ scraping JKT48 website API
 
 #### Get all list member
 
-```http
+```bash
   GET /api/member/
 ```
 
 #### Get detail member
 
-```http
-  GET /api/member/:idmember
+```bash
+  GET /api/member/detail/:idmember
 ```
 
 | Parameter  | Type     | Description                       |
