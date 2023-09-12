@@ -15,4 +15,4 @@ app.get("/", (req, res) => {
   res.send("scraping jkt48 web by faruuhan");
 });
 
-app.use(router);
+app.use("/api", router);
