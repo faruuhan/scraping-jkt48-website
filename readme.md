@@ -48,3 +48,9 @@ scraping JKT48 website API
 | Parameter  | Type     | Description                       |
 | :--------- | :------- | :-------------------------------- |
 | `idmember` | `number` | **Required**. Id of item to fetch |
+
+#### Get all list news
+
+```bash
+  GET /api/news/
+```
