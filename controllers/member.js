@@ -58,24 +58,18 @@ const member = {
           ".row .col-12 .entry-mypage__item .d-flex .entry-mypage__item--content"
         );
 
-        let temp = [];
-
-        listDetail.forEach((detail) => {
-          temp.push(detail.innerText);
-        });
-
         const data = {
           image:
             "https://jkt48.com" +
             document
               .querySelector(".entry-mypage__profile img")
               .getAttribute("src"),
-          fullName: temp[0],
-          birthday: temp[1],
-          blood: temp[2],
-          zodiac: temp[3],
-          height: temp[4],
-          nickname: temp[5],
+          fullName: listDetail[0].innerText,
+          birthday: listDetail[1].innerText,
+          bloodType: listDetail[2].innerText,
+          zodiac: listDetail[3].innerText,
+          height: listDetail[4].innerText,
+          nickname: listDetail[5].innerText,
         };
 
         return data;
