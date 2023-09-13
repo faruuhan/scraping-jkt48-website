@@ -24,11 +24,12 @@ const member = {
             "https://jkt48.com" +
             member.querySelector("a img").getAttribute("src"),
           name: member.querySelector("a img").getAttribute("alt"),
-          member:
-            member.querySelector("a img").getAttribute("src").includes("v=") ===
-            true
-              ? "Reguler"
-              : "Trainee",
+          memberStatus: member
+            .querySelector("a img")
+            .getAttribute("src")
+            .includes("v=")
+            ? "Reguler"
+            : "Trainee",
         }));
 
         return data;
