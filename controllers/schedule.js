@@ -2,11 +2,11 @@ import puppeteer from "puppeteer";
 
 const schedule = {
   getSchedule: async (req, res) => {
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto("https://jkt48.com/calendar/list?lang=id");
 
       const scheduleData = await page.evaluate(() => {
@@ -63,13 +63,13 @@ const schedule = {
   },
 
   getDetailSchedule: async (req, res) => {
+    const { idschedule } = req.params;
+
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const { idschedule } = req.params;
-
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto(
         `https://jkt48.com/theater/schedule/id/${idschedule}?lang=id`
       );
@@ -122,13 +122,13 @@ const schedule = {
   },
 
   getDetailSchedule: async (req, res) => {
+    const { idschedule } = req.params;
+
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const { idschedule } = req.params;
-
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto(
         `https://jkt48.com/theater/schedule/id/${idschedule}?lang=id`
       );
@@ -181,11 +181,11 @@ const schedule = {
   },
 
   getTheaterSchedule: async (req, res) => {
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto(`https://jkt48.com/theater/schedule?lang=id`);
 
       const scheduleDetailData = await page.evaluate(() => {

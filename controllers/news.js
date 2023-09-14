@@ -2,11 +2,11 @@ import puppeteer from "puppeteer";
 
 const news = {
   getAllNews: async (req, res) => {
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto("https://jkt48.com/news/list?lang=id");
 
       const newsDataList = await page.evaluate(() => {
