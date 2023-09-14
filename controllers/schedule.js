@@ -2,11 +2,11 @@ import puppeteer from "puppeteer";
 
 const schedule = {
   getSchedule: async (req, res) => {
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto("https://jkt48.com/calendar/list?lang=id");
 
       const scheduleData = await page.evaluate(() => {
@@ -63,16 +63,130 @@ const schedule = {
   },
 
   getDetailSchedule: async (req, res) => {
+    const { idschedule } = req.params;
+
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
     try {
-      const { idschedule } = req.params;
-
-      const browser = await puppeteer.launch({ headless: false });
-
-      const page = await browser.newPage();
-
       await page.goto(
         `https://jkt48.com/theater/schedule/id/${idschedule}?lang=id`
       );
+
+      const scheduleDetailData = await page.evaluate(() => {
+        const titleConvert = (title) => {
+          return title.replaceAll("\n", "");
+        };
+
+        const dateConvert = (date) => {
+          return date.replaceAll("\n", " ");
+        };
+
+        const scheduleList = [];
+
+        const getTable = document.querySelectorAll(".table-pink__scroll table");
+
+        const getRowTable = Array.from(
+          getTable[1].querySelectorAll("tbody tr")
+        );
+
+        getRowTable.map((schedule) => {
+          const listMember = [];
+          const seitansai = [];
+          schedule.querySelectorAll("td a").forEach((member) => {
+            if (!member.getAttribute("style")) {
+              listMember.push(member.innerText);
+            } else {
+              seitansai.push(member.innerText);
+            }
+          });
+
+          scheduleList.push({
+            show: dateConvert(schedule.querySelectorAll("td")[0].innerText),
+            setlist: titleConvert(schedule.querySelectorAll("td")[1].innerText),
+            member: listMember,
+            seitansai,
+          });
+        });
+
+        return scheduleList;
+      });
+
+      await browser.close();
+      return res.status(200).json({ code: 200, result: scheduleDetailData });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ code: 500, messages: "Failed get data!" });
+    }
+  },
+
+  getDetailSchedule: async (req, res) => {
+    const { idschedule } = req.params;
+
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
+    try {
+      await page.goto(
+        `https://jkt48.com/theater/schedule/id/${idschedule}?lang=id`
+      );
+
+      const scheduleDetailData = await page.evaluate(() => {
+        const titleConvert = (title) => {
+          return title.replaceAll("\n", "");
+        };
+
+        const dateConvert = (date) => {
+          return date.replaceAll("\n", " ");
+        };
+
+        const scheduleList = [];
+
+        const getTable = document.querySelectorAll(".table-pink__scroll table");
+
+        const getRowTable = Array.from(
+          getTable[1].querySelectorAll("tbody tr")
+        );
+
+        getRowTable.map((schedule) => {
+          const listMember = [];
+          const seitansai = [];
+          schedule.querySelectorAll("td a").forEach((member) => {
+            if (!member.getAttribute("style")) {
+              listMember.push(member.innerText);
+            } else {
+              seitansai.push(member.innerText);
+            }
+          });
+
+          scheduleList.push({
+            show: dateConvert(schedule.querySelectorAll("td")[0].innerText),
+            setlist: titleConvert(schedule.querySelectorAll("td")[1].innerText),
+            member: listMember,
+            seitansai,
+          });
+        });
+
+        return scheduleList;
+      });
+
+      await browser.close();
+      return res.status(200).json({ code: 200, result: scheduleDetailData });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ code: 500, messages: "Failed get data!" });
+    }
+  },
+
+  getTheaterSchedule: async (req, res) => {
+    const browser = await puppeteer.launch({ headless: false });
+
+    const page = await browser.newPage();
+
+    try {
+      await page.goto(`https://jkt48.com/theater/schedule?lang=id`);
 
       const scheduleDetailData = await page.evaluate(() => {
         const titleConvert = (title) => {

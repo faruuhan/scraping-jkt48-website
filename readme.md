@@ -33,6 +33,12 @@ scraping JKT48 website API
 | :----------- | :------- | :-------------------------------- |
 | `idschedule` | `number` | **Required**. Id of item to fetch |
 
+#### Get all schedule theater latest
+
+```bash
+  GET /api/schedule/theater
+```
+
 #### Get all list member
 
 ```bash
