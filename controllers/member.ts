@@ -1,7 +1,8 @@
 import puppeteer from "puppeteer";
+import { Request, Response } from "express";
 
 const member = {
-  getAllMember: async (req, res) => {
+  getAllMember: async (req: Request, res: Response) => {
     const browser = await puppeteer.launch({ headless: false });
 
     const page = await browser.newPage();
@@ -10,11 +11,11 @@ const member = {
       await page.goto("https://jkt48.com/member/list?lang=id");
 
       const memberData = await page.evaluate(() => {
-        const getID = (url) => {
+        const getID = (url: string) => {
           return url.substr(18).split("?")[0];
         };
 
-        const memberList = Array.from(
+        const memberList: HTMLElement[] = Array.from(
           document.querySelectorAll(".row-all-10 .col-4 .entry-member")
         );
 
@@ -44,7 +45,7 @@ const member = {
     }
   },
 
-  getDetailMember: async (req, res) => {
+  getDetailMember: async (req: Request, res: Response) => {
     const { idmember } = req.params;
 
     const browser = await puppeteer.launch({ headless: false });
@@ -65,12 +66,12 @@ const member = {
             document
               .querySelector(".entry-mypage__profile img")
               .getAttribute("src"),
-          fullName: listDetail[0].innerText,
-          birthday: listDetail[1].innerText,
-          bloodType: listDetail[2].innerText,
-          zodiac: listDetail[3].innerText,
-          height: listDetail[4].innerText,
-          nickname: listDetail[5].innerText,
+          fullName: (listDetail[0] as HTMLHeadElement).innerText,
+          birthday: (listDetail[1] as HTMLHeadElement).innerText,
+          bloodType: (listDetail[2] as HTMLHeadElement).innerText,
+          zodiac: (listDetail[3] as HTMLHeadElement).innerText,
+          height: (listDetail[4] as HTMLHeadElement).innerText,
+          nickname: (listDetail[5] as HTMLHeadElement).innerText,
         };
 
         return data;

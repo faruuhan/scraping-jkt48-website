@@ -1,7 +1,8 @@
 import puppeteer from "puppeteer";
+import { Request, Response } from "express";
 
 const news = {
-  getAllNews: async (req, res) => {
+  getAllNews: async (req: Request, res: Response) => {
     const browser = await puppeteer.launch({ headless: false });
 
     const page = await browser.newPage();
@@ -15,8 +16,8 @@ const news = {
         );
 
         const data = getNews.map((news) => ({
-          title: news.querySelector("h3 a").innerText,
-          time: news.querySelector("time").innerText,
+          title: (news.querySelector("h3 a") as HTMLHeadElement).innerText,
+          time: (news.querySelector("time") as HTMLHeadElement).innerText,
         }));
 
         return data;
