@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { Request, Response } from "express";
-import { ScheduleList } from "../utils/types";
+import { ScheduleListDetail } from "../utils/types";
 
 const schedule = {
   getSchedule: async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ const schedule = {
         };
 
         const categoryFilter = (category: string) => {
-          switch (category.substr(8).split(".")[1]) {
+          switch (category.slice(8).split(".")[1]) {
             case "cat2":
               return "Event";
             case "cat17":
@@ -29,7 +29,7 @@ const schedule = {
           }
         };
 
-        const scheduleList = Array.from(
+        const scheduleList: Element[] = Array.from(
           document.querySelectorAll(".entry-schedule__calendar .table tbody tr")
         );
 
@@ -41,7 +41,7 @@ const schedule = {
             (event) => ({
               title: (event.querySelector("p a") as HTMLHeadElement)?.innerText,
               category: categoryFilter(
-                event.querySelector("span img").getAttribute("src")
+                event.querySelector("span img")!.getAttribute("src")!
               ),
             })
           ),
@@ -89,7 +89,7 @@ const schedule = {
           return date.replaceAll("\n", " ");
         };
 
-        const scheduleList: ScheduleList[] = [];
+        const scheduleList: ScheduleListDetail[] = [];
 
         const getTable = document.querySelectorAll(".table-pink__scroll table");
 
@@ -148,7 +148,7 @@ const schedule = {
           return date.replaceAll("\n", " ");
         };
 
-        const scheduleList: ScheduleList[] = [];
+        const scheduleList: ScheduleListDetail[] = [];
 
         const getTable = document.querySelectorAll(".table-pink__scroll table");
 

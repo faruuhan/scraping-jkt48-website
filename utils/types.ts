@@ -1,4 +1,4 @@
-export interface ScheduleList {
+export interface ScheduleListDetail {
   show: string;
   setlist: string;
   member: string[];

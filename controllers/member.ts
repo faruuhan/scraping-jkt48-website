@@ -20,14 +20,14 @@ const member = {
         );
 
         const data = memberList.map((member) => ({
-          id: getID(member.querySelector("a").getAttribute("href")),
+          id: getID(member.querySelector("a")!.getAttribute("href")!),
           image:
             "https://jkt48.com" +
-            member.querySelector("a img").getAttribute("src"),
-          name: member.querySelector("a img").getAttribute("alt"),
+            member.querySelector("a img")!.getAttribute("src"),
+          name: member.querySelector("a img")!.getAttribute("alt"),
           memberStatus: member
-            .querySelector("a img")
-            .getAttribute("src")
+            .querySelector("a img")!
+            .getAttribute("src")!
             .includes("v=")
             ? "Reguler"
             : "Trainee",
@@ -64,8 +64,8 @@ const member = {
           image:
             "https://jkt48.com" +
             document
-              .querySelector(".entry-mypage__profile img")
-              .getAttribute("src"),
+              .querySelector(".entry-mypage__profile img")!
+              .getAttribute("src")!,
           fullName: (listDetail[0] as HTMLHeadElement).innerText,
           birthday: (listDetail[1] as HTMLHeadElement).innerText,
           bloodType: (listDetail[2] as HTMLHeadElement).innerText,
