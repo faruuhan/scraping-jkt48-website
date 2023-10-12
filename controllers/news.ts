@@ -1,21 +1,22 @@
-import puppeteer from "puppeteer";
+import puppeteer, { Browser, Page } from "puppeteer";
 import { Request, Response } from "express";
+import { NewsDataList } from "../utils/types";
 
 const news = {
   getAllNews: async (req: Request, res: Response) => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser: Browser = await puppeteer.launch({ headless: false });
 
-    const page = await browser.newPage();
+    const page: Page = await browser.newPage();
 
     try {
-      await page.goto("https://jkt48.com/news/list?lang=id");
+      await page.goto(`${process.env.URL_SCRAP}/news/list?lang=id`);
 
-      const newsDataList = await page.evaluate(() => {
-        const getNews = Array.from(
+      const newsDataList: NewsDataList[] = await page.evaluate(() => {
+        const getNews: HTMLElement[] = Array.from(
           document.querySelectorAll(".entry-news .entry-news__list")
         );
 
-        const data = getNews.map((news) => ({
+        const data: NewsDataList[] = getNews.map((news: HTMLElement) => ({
           title: (news.querySelector("h3 a") as HTMLHeadElement).innerText,
           time: (news.querySelector("time") as HTMLHeadElement).innerText,
         }));
