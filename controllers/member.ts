@@ -1,33 +1,34 @@
-import puppeteer from "puppeteer";
+import puppeteer, { Browser, Page } from "puppeteer";
 import { Request, Response } from "express";
+import { DetailMember, MemberData } from "../utils/types";
 
 const member = {
   getAllMember: async (req: Request, res: Response) => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser: Browser = await puppeteer.launch({ headless: false });
 
-    const page = await browser.newPage();
+    const page: Page = await browser.newPage();
 
     try {
-      await page.goto("https://jkt48.com/member/list?lang=id");
+      await page.goto(`${process.env.URL_SCRAP}/member/list?lang=id`);
 
-      const memberData = await page.evaluate(() => {
-        const getID = (url: string) => {
-          return url.substr(18).split("?")[0];
+      const memberData: MemberData[] = await page.evaluate(() => {
+        const url: string = "https://jkt48.com";
+
+        const getID = (url: string): string => {
+          return url.slice(18).split("?")[0];
         };
 
         const memberList: HTMLElement[] = Array.from(
           document.querySelectorAll(".row-all-10 .col-4 .entry-member")
         );
 
-        const data = memberList.map((member) => ({
-          id: getID(member.querySelector("a").getAttribute("href")),
-          image:
-            "https://jkt48.com" +
-            member.querySelector("a img").getAttribute("src"),
-          name: member.querySelector("a img").getAttribute("alt"),
+        const data: MemberData[] = memberList.map((member: HTMLElement) => ({
+          id: getID(member.querySelector("a")!.getAttribute("href")!),
+          image: `${url}` + member.querySelector("a img")!.getAttribute("src"),
+          name: member.querySelector("a img")!.getAttribute("alt"),
           memberStatus: member
-            .querySelector("a img")
-            .getAttribute("src")
+            .querySelector("a img")!
+            .getAttribute("src")!
             .includes("v=")
             ? "Reguler"
             : "Trainee",
@@ -48,24 +49,28 @@ const member = {
   getDetailMember: async (req: Request, res: Response) => {
     const { idmember } = req.params;
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser: Browser = await puppeteer.launch({ headless: false });
 
-    const page = await browser.newPage();
+    const page: Page = await browser.newPage();
 
     try {
-      await page.goto(`https://jkt48.com/member/detail/id/${idmember}?lang=id`);
+      await page.goto(
+        `${process.env.URL_SCRAP}/member/detail/id/${idmember}?lang=id`
+      );
 
-      const detailMember = await page.evaluate(() => {
-        const listDetail = document.querySelectorAll(
+      const detailMember: DetailMember = await page.evaluate(() => {
+        const url: string = "https://jkt48.com";
+
+        const listDetail: NodeList = document.querySelectorAll(
           ".row .col-12 .entry-mypage__item .d-flex .entry-mypage__item--content"
         );
 
-        const data = {
+        const data: DetailMember = {
           image:
-            "https://jkt48.com" +
+            `${url}` +
             document
-              .querySelector(".entry-mypage__profile img")
-              .getAttribute("src"),
+              .querySelector(".entry-mypage__profile img")!
+              .getAttribute("src")!,
           fullName: (listDetail[0] as HTMLHeadElement).innerText,
           birthday: (listDetail[1] as HTMLHeadElement).innerText,
           bloodType: (listDetail[2] as HTMLHeadElement).innerText,
