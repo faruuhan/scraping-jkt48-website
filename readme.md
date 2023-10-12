@@ -13,6 +13,10 @@ scraping JKT48 website is project which takes data from JKT48 web be REST API. d
 - Theater Schedule (showing list schedule theater cooming soon)
 - All News
 
+### Showcase
+
+![ezgif-1-4a7e5fc2df](https://github.com/faruuhan/scraping-jkt48-website/assets/92959224/7931d541-ee05-4172-9acf-aad92cd6d173)
+
 ## Usage
 
 1. Clone this repository
@@ -33,4 +37,6 @@ i think i'm open for improve, if you found bug, idea. you can open issue.
 
 ## Acknowledgements
 
-you can give star! ⭐ if you like, i say thanks
+you can give star! ⭐ if you like.
+
+![](https://s6.gifyu.com/images/S6Wpu.gif)
