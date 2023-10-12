@@ -19,12 +19,13 @@ scraping JKT48 website is project which takes data from JKT48 web be REST API. d
    ```bash
    git clone https://github.com/faruuhan/scraping-jkt48-website.git
    ```
-2. Install dependecies (`yarn install`)
-3. Start the development environment
+2. rename `env.example` to `.env`
+3. Install dependecies (`yarn install`)
+4. Start the development environment
    ```bash
    yarn run dev
    ```
-4. visit http://localhost:8000/
+5. visit http://localhost:8000/
 
 ## Contributing
 
