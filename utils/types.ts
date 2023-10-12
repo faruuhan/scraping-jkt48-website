@@ -8,6 +8,7 @@ export interface ScheduleListDetail {
 export interface ScheduleList {
   date: string;
   event: {
+    id: number;
     title: string;
     category: string;
   }[];
@@ -19,7 +20,7 @@ export interface ScheduleData {
 }
 
 export interface MemberData {
-  id: string;
+  id: number;
   image: string;
   name: string | null;
   memberStatus: string;

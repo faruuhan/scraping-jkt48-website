@@ -28,6 +28,16 @@ const schedule = {
           }
         };
 
+        const generateID = (url: string): number => {
+          return url.includes("theater")
+            ? Number(url.slice(22).split("?")[0])
+            : Number(
+                url.slice(17, 30).split("/")[0] +
+                  url.slice(17, 30).split("/")[2] +
+                  url.slice(17, 30).split("/")[4]
+              );
+        };
+
         const scheduleList: HTMLElement[] = Array.from(
           document.querySelectorAll(".entry-schedule__calendar .table tbody tr")
         );
@@ -39,6 +49,9 @@ const schedule = {
             ),
             event: Array.from(schedule.querySelectorAll("td .contents"))?.map(
               (event) => ({
+                id: generateID(
+                  event.querySelector("p a")!.getAttribute("href")!
+                ),
                 title: (event.querySelector("p a") as HTMLHeadElement)
                   ?.innerText,
                 category: categoryFilter(
