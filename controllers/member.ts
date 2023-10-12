@@ -14,8 +14,8 @@ const member = {
       const memberData: MemberData[] = await page.evaluate(() => {
         const url: string = "https://jkt48.com";
 
-        const getID = (url: string): string => {
-          return url.slice(18).split("?")[0];
+        const getID = (url: string): number => {
+          return Number(url.slice(18).split("?")[0]);
         };
 
         const memberList: HTMLElement[] = Array.from(
