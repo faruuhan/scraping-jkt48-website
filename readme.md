@@ -39,4 +39,7 @@ i think i'm open for improve, if you found bug, idea. you can open issue.
 
 you can give star! ⭐ if you like.
 
-![](https://s6.gifyu.com/images/S6Wpu.gif)
+<p align="center">
+   <img src="https://github.com/faruuhan/scraping-jkt48-website/assets/92959224/a57e7482-a835-466c-b261-c9f8c515e8dd"/>
+</p>
+
