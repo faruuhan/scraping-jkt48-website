@@ -37,6 +37,8 @@ export interface DetailMember {
 }
 
 export interface NewsDataList {
+  id: number;
   title: string;
-  time: string;
+  date: string;
+  category: string;
 }
