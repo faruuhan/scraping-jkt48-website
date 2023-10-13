@@ -79,7 +79,6 @@ const schedule = {
       return res.status(200).json({ code: 200, result: scheduleData });
     } catch (error) {
       await browser.close();
-      console.log(error);
       return res.status(500).json({ code: 500, messages: "Failed get data!" });
     }
   },
@@ -208,7 +207,6 @@ const schedule = {
       await browser.close();
       return res.status(200).json({ code: 200, result: scheduleDetailData });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ code: 500, messages: "Failed get data!" });
     }
   },
