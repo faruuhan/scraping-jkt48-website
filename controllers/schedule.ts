@@ -28,6 +28,16 @@ const schedule = {
           }
         };
 
+        const generateID = (url: string): number => {
+          return url.includes("theater")
+            ? Number(url.slice(22).split("?")[0])
+            : Number(
+                url.slice(17, 30).split("/")[0] +
+                  url.slice(17, 30).split("/")[2] +
+                  url.slice(17, 30).split("/")[4]
+              );
+        };
+
         const scheduleList: HTMLElement[] = Array.from(
           document.querySelectorAll(".entry-schedule__calendar .table tbody tr")
         );
@@ -39,6 +49,9 @@ const schedule = {
             ),
             event: Array.from(schedule.querySelectorAll("td .contents"))?.map(
               (event) => ({
+                id: generateID(
+                  event.querySelector("p a")!.getAttribute("href")!
+                ),
                 title: (event.querySelector("p a") as HTMLHeadElement)
                   ?.innerText,
                 category: categoryFilter(
@@ -66,7 +79,6 @@ const schedule = {
       return res.status(200).json({ code: 200, result: scheduleData });
     } catch (error) {
       await browser.close();
-      console.log(error);
       return res.status(500).json({ code: 500, messages: "Failed get data!" });
     }
   },
@@ -195,7 +207,6 @@ const schedule = {
       await browser.close();
       return res.status(200).json({ code: 200, result: scheduleDetailData });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({ code: 500, messages: "Failed get data!" });
     }
   },

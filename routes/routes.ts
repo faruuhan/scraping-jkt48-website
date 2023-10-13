@@ -1,8 +1,8 @@
-import express from "express";
-const router = express();
+import express, { Express } from "express";
 import schedule from "../controllers/schedule";
 import member from "../controllers/member";
 import news from "../controllers/news";
+const router: Express = express();
 
 router.get("/schedule", schedule.getSchedule);
 router.get("/schedule/detail/:idschedule", schedule.getDetailSchedule);
