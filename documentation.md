@@ -43,3 +43,9 @@
 ```bash
   GET /api/news/
 ```
+
+#### Get list next birthday
+
+```bash
+  GET /api/birthday/
+```

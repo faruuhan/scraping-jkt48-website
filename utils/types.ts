@@ -42,3 +42,9 @@ export interface NewsDataList {
   date: string;
   category: string;
 }
+
+export interface BirthdayDataList {
+  date: string | undefined;
+  name: string | undefined;
+  statusMember: string | undefined;
+}

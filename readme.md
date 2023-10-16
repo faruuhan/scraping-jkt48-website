@@ -12,6 +12,7 @@ scraping JKT48 website is project which takes data from JKT48 web be REST API. d
 - Detail Schedule
 - Theater Schedule (showing list schedule theater cooming soon)
 - All News
+- List Next BirthDay
 
 ## Showcase
 
