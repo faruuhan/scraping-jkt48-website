@@ -12,8 +12,9 @@ scraping JKT48 website is project which takes data from JKT48 web be REST API. d
 - Detail Schedule
 - Theater Schedule (showing list schedule theater cooming soon)
 - All News
+- List Next BirthDay
 
-### Showcase
+## Showcase
 
 ![ezgif-1-4a7e5fc2df](https://github.com/faruuhan/scraping-jkt48-website/assets/92959224/7931d541-ee05-4172-9acf-aad92cd6d173)
 
@@ -31,6 +32,10 @@ scraping JKT48 website is project which takes data from JKT48 web be REST API. d
    ```
 5. visit http://localhost:8000/
 
+## API Referance
+
+chek documentation.md for api referance
+
 ## Contributing
 
 i think i'm open for improve, if you found bug, idea. you can open issue.
@@ -42,4 +47,3 @@ you can give star! ⭐ if you like.
 <p align="center">
    <img src="https://github.com/faruuhan/scraping-jkt48-website/assets/92959224/a57e7482-a835-466c-b261-c9f8c515e8dd"/>
 </p>
-
